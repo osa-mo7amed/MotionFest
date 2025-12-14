@@ -1,9 +1,6 @@
 <?php
 session_start();
 $conn = mysqli_connect("localhost", "root", "", "motionfestdb");
-if (!$conn) {
-  die("Connection failed: " . mysqli_connect_error());
-}
 
 // Check Admin Access
 if (!isset($_SESSION['admin_id'])) {
@@ -227,7 +224,6 @@ $cap_res = mysqli_query($conn, $cap_sql);
             <div
               class="card-header bg-white border-bottom-0 pt-3 pb-0 d-flex justify-content-between align-items-center">
               <h5 class="mb-0">User Feedbacks</h5>
-              <a href="feedback.php" class="btn btn-sm btn-outline-info">View All Messages</a>
             </div>
             <div class="card-body">
               <div class="table-responsive">
@@ -238,21 +234,19 @@ $cap_res = mysqli_query($conn, $cap_sql);
                       <th>Sender</th>
                       <th>Email</th>
                       <th>Subject</th>
-                      <th>Preview</th>
+                      <th>Message</th>
                     </tr>
                   </thead>
                   <tbody>
                     <?php
                     if (mysqli_num_rows($feed_res) > 0) {
                       while ($row = mysqli_fetch_assoc($feed_res)) {
-                        // Truncate message for preview
-                        $preview = (strlen($row['message']) > 50) ? substr($row['message'], 0, 50) . '...' : $row['message'];
                         echo "<tr>
                                 <td>#{$row['feedbackID']}</td>
                                 <td class='fw-bold'>{$row['fullName']}</td>
                                 <td>{$row['email']}</td>
                                 <td><span class='badge bg-light text-dark border'>{$row['subject']}</span></td>
-                                <td class='text-muted small'>{$preview}</td>
+                                <td class='text-muted small'>{$row['message']}</td>
                             </tr>";
                       }
                     } else {

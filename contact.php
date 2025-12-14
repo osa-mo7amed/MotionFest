@@ -16,8 +16,6 @@ if (isset($_POST['send_message'])) {
   $sql = "INSERT INTO feedbacks (fullName, email, subject, message) VALUES ('$fullName', '$email', '$subject', '$message')";
   $result = mysqli_query($conn, $sql);
 
-  echo "<script>alert('$fullName');</script>";
-
   $msg = "<div class='alert alert-success'>Your message has been sent successfully!</div>";
 
 }

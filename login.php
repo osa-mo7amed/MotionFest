@@ -29,11 +29,17 @@ if (isset($_POST['login_btn'])) {
     $_SESSION['user_id'] = $row['userID'];
     $_SESSION['name'] = $row['firstName'];
     $_SESSION['role'] = 'user';
-    header("Location: profile.php");
+    header("Location: index.php");
+  } else {
+    $error = "User does not exist! Please register.";
   }
 
-  // If code reaches here, login failed
-  $error = "Invalid Login Credentials";
+  $sql_user_exist = "SELECT * FROM users WHERE email = '$input'";
+  $res_user_exist = mysqli_query($conn, $sql_user_exist);
+
+  if (mysqli_num_rows($res_user_exist) > 0) {
+    $error = "Invalid Login Credentials";
+  }
 }
 ?>
 <!DOCTYPE html>

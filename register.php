@@ -10,12 +10,19 @@ if (isset($_POST['register_btn'])) {
   $phone = $_POST['phone'];
   $addr = $_POST['address'];
 
-  // Direct Insert
-  $sql = "INSERT INTO users (firstName, lastName, email, password, phone, address) 
+  $sql_check = "SELECT * FROM users WHERE email='$email'";
+  $check_result = mysqli_query($conn, $sql_check);
+
+  if (mysqli_num_rows($check_result) > 0) {
+    echo "<script>alert('This user is already registered! Please login');</script>";
+  } else {
+    // Direct Insert
+    $sql = "INSERT INTO users (firstName, lastName, email, password, phone, address) 
             VALUES ('$fname', '$lname', '$email', '$pass', '$phone', '$addr')";
 
-  mysqli_query($conn, $sql);
-  echo "<script>alert('Account created! Please login.'); window.location.href='login.php';</script>";
+    mysqli_query($conn, $sql);
+    echo "<script>alert('Account created! Please login.'); window.location.href='login.php';</script>";
+  }
 }
 ?>
 <!DOCTYPE html>

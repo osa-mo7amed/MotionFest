@@ -44,7 +44,8 @@ if (isset($_POST['delete_btn'])) {
   <header id="header" class="header d-flex align-items-center fixed-top bg-white shadow-sm">
     <div class="container-fluid container-xl d-flex justify-content-between">
       <a href="#" class="logo d-flex align-items-center">
-        <h1 class="sitename text-dark">MotionFest Admin</h1>
+        <h1 class="sitename text-dark">MotionFest <span style="font-size:0.6em; color:var(--accent-color);">ADMIN</span>
+        </h1>
       </a>
       <nav id="navmenu" class="navmenu">
         <ul>
