@@ -36,7 +36,7 @@ $is_logged_in = isset($_SESSION['user_id']) || isset($_SESSION['admin_id']);
             <?php endif; ?>
             <li><a href="logout.php" style="color: var(--accent-color);" class="text-danger">Logout</a></li>
           <?php else: ?>
-            <li><a href="login.php" class="btn-getstarted" style="margin-left:20px;">Login</a></li>
+            <li><a href="login.php" class="active">Login</a></li>
           <?php endif; ?>
         </ul>
       </nav>
