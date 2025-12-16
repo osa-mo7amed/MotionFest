@@ -1,6 +1,1 @@
-Thanks for downloading this template!
-
-Template Name: Evently
-Template URL: https://bootstrapmade.com/evently-bootstrap-events-template/
-Author: BootstrapMade.com
-License: https://bootstrapmade.com/license/
+2025-26S1-CSEB4123/294 (Web Programming) Section 01A
