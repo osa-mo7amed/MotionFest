@@ -91,7 +91,7 @@ if (isset($_POST['join_event_btn'])) {
           ?>
           <div class="col-lg-4 col-md-6">
             <div class="card h-100 shadow-sm border-0">
-              <div class="card-body" style="background-color: #FFFFE4">
+              <div class="card-body" style="background-color: #dcf6ffff; border-radius: 8px 8px 0px 0px;">
                 <span class="badge bg-primary mb-2"><?php echo $row['eventType']; ?></span>
                 <h4 class="card-title"><?php echo $row['eventName']; ?></h4>
                 <h6 class="text-muted"><?php echo $row['eventSubCategory']; ?></h6>
@@ -108,7 +108,8 @@ if (isset($_POST['join_event_btn'])) {
                   </small>
                 </div>
               </div>
-              <div class="card-footer border-top-0 pb-3" style="background-color: #FFFFE4">
+              <div class="card-footer border-top-0 pb-3"
+                style="background-color: #dcf6ffff; border-radius: 8px 8px 0px 0px;">
                 <?php if ($is_full): ?>
                   <button class="btn btn-secondary w-100" disabled>Fully Booked</button>
                 <?php else: ?>

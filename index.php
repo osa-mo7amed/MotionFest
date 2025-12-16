@@ -81,7 +81,7 @@ $is_logged_in = isset($_SESSION['user_id']) || isset($_SESSION['admin_id']);
               ?>
               <div class="col-lg-4 col-md-6">
                 <div class="card h-100 border-0 shadow-sm">
-                  <div class="card-body text-center" style="background-color: #FFFFE4">
+                  <div class="card-body text-center" style="background-color: #dcf6ffff; border-radius: 8px 8px 0px 0px;">
                     <h4 class="card-title"><?php echo $row['eventName']; ?></h4>
                     <span class="badge bg-primary mb-3"><?php echo $row['eventType']; ?></span>
                     <p class="card-text small text-muted"><?php echo $row['eventDescription']; ?></p>
