@@ -4,11 +4,20 @@ $is_logged_in = isset($_SESSION['user_id']) || isset($_SESSION['admin_id']);
 
 $msg = "";
 
+$conn = mysqli_connect("localhost", "root", "", "motionfestdb");
+
 // Handle Form via POST
 if (isset($_POST['send_message'])) {
-  // Logic to send email would go here
-  // Since no DB table for messages exists, we just show success
+  $fullName = $_POST["name"];
+  $email = $_POST["email"];
+  $subject = $_POST["subject"];
+  $message = $_POST["message"];
+
+  $sql = "INSERT INTO feedbacks (fullName, email, subject, message) VALUES ('$fullName', '$email', '$subject', '$message')";
+  $result = mysqli_query($conn, $sql);
+
   $msg = "<div class='alert alert-success'>Your message has been sent successfully!</div>";
+
 }
 ?>
 <!DOCTYPE html>

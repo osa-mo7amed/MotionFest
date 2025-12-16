@@ -22,10 +22,17 @@ if (isset($_POST['join_event_btn'])) {
   $row_count = mysqli_fetch_assoc($res_count);
 
   if ($row_count['total'] < $row_event['maxParticipants']) {
-    // 3. Insert Participation
-    $sql_insert = "INSERT INTO participants (userID, eventID) VALUES ('$uid', '$eid')";
-    mysqli_query($conn, $sql_insert);
-    echo "<script>alert('Successfully Registered!'); window.location.href='profile.php';</script>";
+    $sql_check = "SELECT * FROM participants WHERE userID='$uid'";
+    $result = mysqli_query($conn, $sql_check);
+
+    if (mysqli_num_rows($result) > 0) {
+      echo "<script>alert('You are already registered in the event!');</script>";
+    } else {
+      // 3. Insert Participation
+      $sql_insert = "INSERT INTO participants (userID, eventID) VALUES ('$uid', '$eid')";
+      mysqli_query($conn, $sql_insert);
+      echo "<script>alert('Successfully Registered!'); window.location.href='profile.php';</script>";
+    }
   } else {
     echo "<script>alert('Sorry, this event is full.');</script>";
   }

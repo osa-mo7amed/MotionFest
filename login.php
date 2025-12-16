@@ -29,11 +29,17 @@ if (isset($_POST['login_btn'])) {
     $_SESSION['user_id'] = $row['userID'];
     $_SESSION['name'] = $row['firstName'];
     $_SESSION['role'] = 'user';
-    header("Location: profile.php");
+    header("Location: index.php");
+  } else {
+    $error = "User does not exist! Please register.";
   }
 
-  // If code reaches here, login failed
-  $error = "Invalid Login Credentials";
+  $sql_user_exist = "SELECT * FROM users WHERE email = '$input'";
+  $res_user_exist = mysqli_query($conn, $sql_user_exist);
+
+  if (mysqli_num_rows($res_user_exist) > 0) {
+    $error = "Invalid Login Credentials";
+  }
 }
 ?>
 <!DOCTYPE html>
@@ -47,28 +53,31 @@ if (isset($_POST['login_btn'])) {
 </head>
 
 <body class="d-flex align-items-center justify-content-center vh-100 bg-light">
-  <div class="card shadow p-4" style="width: 400px;">
-    <div class="text-center mb-4">
-      <h2 class="text-primary">MotionFest</h2>
-      <p>Sign In</p>
+<div id="hero" class="hero2 d-flex align-items-center justify-content-center min-vh-100">
+    <div class="background-overlay"></div>
+    <div class="card shadow p-4" style="width: 400px; z-index: 1;">
+      <div class="text-center mb-4">
+        <h2 class="text-primary"><strong>MotionFest</strong></h2>
+        <p>Sign In</p>
+      </div>
+      <?php if ($error != ""): ?>
+        <div class="alert alert-danger text-center"><?php echo $error; ?></div>
+      <?php endif; ?>
+      <form method="POST">
+        <div class="mb-3">
+          <label>Email</label>
+          <input type="text" name="login_input" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label>Password</label>
+          <input type="password" name="password" class="form-control" required>
+        </div>
+        <button type="submit" name="login_btn" class="btn btn-primary w-100"
+          style="background-color: var(--accent-color); border:none;">Login</button>
+      </form>
+      <p class="text-center mt-3">New Athlete? <a href="register.php">Register Here</a></p>
+      <p class="text-center"><a href="index.php">Back to Home</a></p>
     </div>
-    <?php if ($error != ""): ?>
-      <div class="alert alert-danger text-center"><?php echo $error; ?></div>
-    <?php endif; ?>
-    <form method="POST">
-      <div class="mb-3">
-        <label>Email (User) or Username (Admin)</label>
-        <input type="text" name="login_input" class="form-control" required>
-      </div>
-      <div class="mb-3">
-        <label>Password</label>
-        <input type="password" name="password" class="form-control" required>
-      </div>
-      <button type="submit" name="login_btn" class="btn btn-primary w-100"
-        style="background-color: var(--accent-color); border:none;">Login</button>
-    </form>
-    <p class="text-center mt-3">New Athlete? <a href="register.php">Register Here</a></p>
-    <p class="text-center"><a href="index.php">Back to Home</a></p>
   </div>
 </body>
 

@@ -1,9 +1,6 @@
 <?php
 session_start();
 $conn = mysqli_connect("localhost", "root", "", "motionfestdb");
-if (!$conn) {
-  die("Connection failed: " . mysqli_connect_error());
-}
 
 // Check Admin Access
 if (!isset($_SESSION['admin_id'])) {
@@ -20,6 +17,8 @@ $e_count = mysqli_fetch_row($e_res)[0];
 
 $p_res = mysqli_query($conn, "SELECT COUNT(*) FROM participants");
 $p_count = mysqli_fetch_row($p_res)[0];
+
+$feed_res = mysqli_query($conn, "SELECT * FROM feedbacks ORDER BY feedbackID DESC LIMIT 5");
 
 // 2. Fetch Recent Registrations (Last 5)
 $recent_sql = "SELECT u.firstName, u.lastName, e.eventName, e.eventType 
@@ -219,8 +218,51 @@ $cap_res = mysqli_query($conn, $cap_sql);
         </div>
       </div>
 
+      <div class="row mt-4">
+        <div class="col-12">
+          <div class="card shadow-sm border-0">
+            <div
+              class="card-header bg-white border-bottom-0 pt-3 pb-0 d-flex justify-content-between align-items-center">
+              <h5 class="mb-0">User Feedbacks</h5>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                  <thead class="table-light">
+                    <tr>
+                      <th>ID</th>
+                      <th>Sender</th>
+                      <th>Email</th>
+                      <th>Subject</th>
+                      <th>Message</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php
+                    if (mysqli_num_rows($feed_res) > 0) {
+                      while ($row = mysqli_fetch_assoc($feed_res)) {
+                        echo "<tr>
+                                <td>#{$row['feedbackID']}</td>
+                                <td class='fw-bold'>{$row['fullName']}</td>
+                                <td>{$row['email']}</td>
+                                <td><span class='badge bg-light text-dark border'>{$row['subject']}</span></td>
+                                <td class='text-muted small'>{$row['message']}</td>
+                            </tr>";
+                      }
+                    } else {
+                      echo "<tr><td colspan='5' class='text-center text-muted py-4'>No feedbacks received yet.</td></tr>";
+                    }
+                    ?>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </main>
+
 
   <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>

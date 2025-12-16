@@ -42,7 +42,7 @@ $is_logged_in = isset($_SESSION['user_id']) || isset($_SESSION['admin_id']);
   </header>
 
   <main class="main mt-5 pt-5">
-    <div class="page-title dark-background" style="background-image: url(assets/img/showcase-5.jpg); padding: 100px 0;">
+    <div class="page-title dark-background" style="background-image: url(assets/img/events/2.jpg); padding: 100px 0;">
       <div class="container position-relative text-center">
         <h1>About Us</h1>
         <p>Celebrating Sportsmanship and Community.</p>
@@ -66,7 +66,7 @@ $is_logged_in = isset($_SESSION['user_id']) || isset($_SESSION['admin_id']);
             </ul>
           </div>
           <div class="col-lg-6">
-            <img src="assets/img/gallery-2.webp" class="img-fluid rounded shadow" alt="About MotionFest">
+            <img src="assets/img/events/3.jpg" class="img-fluid rounded shadow" alt="About MotionFest">
           </div>
         </div>
       </div>
